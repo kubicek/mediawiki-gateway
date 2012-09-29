@@ -632,6 +632,19 @@ module MediaWiki
 			end
     end
 
+    # Create a new page, or overwrite an existing one using Semantic Forms
+    #
+    # [title] Page title to create or overwrite, string
+    # [form] Content for the page, string
+    # [query] Hash of form values
+    #
+    # Query:
+    # {'template_name'=>{'field_name' => field_value}}
+    def sfautoedit(title, form, query={})
+      form_data = query.merge({:action => 'sfautoedit', :form => form, :target => title})
+      make_api_request(form_data)
+    end
+
     # Set groups for a user
     #
     # [user] Username of user to modify
